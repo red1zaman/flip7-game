@@ -1,3 +1,17 @@
+import { useState } from "react";
+import Lobby from "./components/Lobby";
+import GameTable from "./components/GameTable";
+
 export default function App() {
-  return <h1>Flip7 Running 🚀</h1>;
+  const [room, setRoom] = useState(null);
+
+  return (
+    <div>
+      {!room ? (
+        <Lobby setRoom={setRoom} />
+      ) : (
+        <GameTable room={room} />
+      )}
+    </div>
+  );
 }
