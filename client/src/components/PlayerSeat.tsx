@@ -1,17 +1,24 @@
+export default function PlayerSeat({ player, index, total }: any) {
+  const angle = (index / total) * 2 * Math.PI;
+  const radius = 130;
 
-export default function PlayerSeat({ player }: any) {
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+
   return (
-    <div style={{
-      border:"2px solid gold",
-      margin:10,
-      padding:10,
-      borderRadius:12,
-      animation: player.busted ? "shake 0.3s" : ""
-    }}>
-      <div style={{fontSize:24}}>{player.avatar}</div>
-      <div>{player.name}</div>
-      <div>Score: {player.totalScore}</div>
-      {player.busted && <div style={{color:"red"}}>💥 BUST</div>}
+    <div
+      className={`seat ${player.busted ? "busted" : ""}`}
+      style={{
+        top: "50%",
+        left: "50%",
+        transform: `translate(${x}px, ${y}px)`
+      }}
+    >
+      <div style={{ fontSize: 22 }}>{player.avatar}</div>
+      <div style={{ fontSize: 12 }}>{player.name}</div>
+      <div style={{ fontSize: 12 }}>Score: {player.totalScore}</div>
+
+      {player.busted && <div style={{ color: "red" }}>💥</div>}
     </div>
   );
 }
