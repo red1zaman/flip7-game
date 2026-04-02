@@ -1,0 +1,46 @@
+.table {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, #14532d, #052e1b);
+  overflow: hidden;
+}
+
+/* center area */
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.deck {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* player seats */
+.seat {
+  position: absolute;
+  width: 100px;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  padding: 8px;
+  border: 2px solid gold;
+}
+
+/* busted */
+.seat.busted {
+  border-color: red;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, 2px); }
+  100% { transform: translate(0); }
+}
