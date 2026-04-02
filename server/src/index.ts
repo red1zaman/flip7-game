@@ -10,4 +10,7 @@ io.on("connection", socket => {
   socket.on("ping", () => socket.emit("pong"));
 });
 
-server.listen(3001);
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, () => {
+  console.log("Server running on " + PORT);
+});
