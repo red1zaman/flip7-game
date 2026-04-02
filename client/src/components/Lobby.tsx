@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { socket } from "../socket";
 
 export default function Lobby({ setRoom }: any) {
   const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("😀");
+  const [avatar] = useState("😀");
 
-  const play = () => {
-    socket.emit("queue", { name, avatar });
-
+  useEffect(() => {
     socket.on("start", (room) => {
+      console.log("Game started:", room);
       setRoom(room);
     });
+
+    return () => {
+      socket.off("start");
+    };
+  }, []);
+
+  const play = () => {
+    console.log("Joining queue...");
+    socket.emit("queue", { name, avatar });
   };
 
   return (
