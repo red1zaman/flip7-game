@@ -1,24 +1,25 @@
-
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { socket } from "../socket";
 import PlayerSeat from "./PlayerSeat";
+import "../styles/table.css";
 
 export default function GameTable({ room }: any) {
   const [state, setState] = useState(room);
 
-  useEffect(()=>{
-    socket.on("update",(data)=>setState(data));
-  },[]);
+  useEffect(() => {
+    socket.on("update", (data) => setState(data));
+  }, []);
 
   return (
-    <div style={{ padding:20 }}>
-      <h2>Game Table</h2>
-
-      <div style={{ display:"flex", flexWrap:"wrap" }}>
-        {state.players.map((p:any)=><PlayerSeat key={p.id} player={p}/>)}
+    <div className="table">
+      <div className="center">
+        <div className="deck">🂠</div>
+        <button onClick={() => socket.emit("draw")}>Draw</button>
       </div>
 
-      <button onClick={()=>socket.emit("draw")}>Draw Card</button>
+      {state.players.map((p: any, i: number) => (
+        <PlayerSeat key={p.id} player={p} index={i} total={state.players.length} />
+      ))}
     </div>
   );
 }
